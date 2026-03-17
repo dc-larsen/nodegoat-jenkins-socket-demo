@@ -12,6 +12,12 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install --production'
+            }
+        }
+
         stage('Socket Security Scan') {
             steps {
                 sh '''
