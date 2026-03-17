@@ -2,7 +2,7 @@
 
 Demonstrates Socket's Tier 1 Reachability analysis integrated into a local Jenkins CI pipeline scanning [OWASP NodeGoat](https://github.com/OWASP/NodeGoat) — an intentionally vulnerable Node.js app.
 
-**Live scan results:** https://socket.dev/dashboard/david-s-github/nodegoat-jenkins-socket-demo/main/
+**Example scan results:** https://socket.dev/dashboard/david-s-github/nodegoat-jenkins-socket-demo/main/
 
 ---
 
@@ -28,17 +28,26 @@ Demonstrates Socket's Tier 1 Reachability analysis integrated into a local Jenki
 
 ## Reproduce the Demo
 
-### 1. Clone the repo
+### 1. Fork and clone the repo
+
+Fork this repo to your own GitHub account, then clone it:
 
 ```bash
-git clone https://github.com/dc-larsen/nodegoat-jenkins-socket-demo.git
+git clone https://github.com/YOUR_GITHUB_USER/nodegoat-jenkins-socket-demo.git
 cd nodegoat-jenkins-socket-demo
 ```
 
-### 2. Set your Socket API key
+### 2. Set environment variables
 
 ```bash
+# Required: your Socket API key
 export SOCKET_API_KEY=sktsec_your_key_here
+
+# Required: point Jenkins at your fork
+export GITHUB_REPO_URL=https://github.com/YOUR_GITHUB_USER/nodegoat-jenkins-socket-demo.git
+
+# Optional: customize the repo name in Socket dashboard (defaults to nodegoat-jenkins-socket-demo)
+export REPO_NAME=nodegoat-jenkins-socket-demo
 ```
 
 ### 3. Start the stack (Jenkins + NodeGoat + MongoDB)
@@ -96,7 +105,7 @@ pipeline {
                 sh '''
                     socketcli \
                         --target-path . \
-                        --repo your-github-user/nodegoat-jenkins-socket-demo \
+                        --repo nodegoat-jenkins-socket-demo \
                         --default-branch \
                         --reach \
                         --reach-ecosystems npm \
@@ -114,7 +123,7 @@ pipeline {
 `jenkins/casc/jenkins.yaml` pre-configures:
 - Admin credentials (admin/admin)
 - Socket API key credential injected from `SOCKET_API_KEY` env var
-- Pipeline job pointed at this repo
+- Pipeline job pointed at your fork via `GITHUB_REPO_URL` env var
 
 ### Docker Compose
 

@@ -9,6 +9,8 @@ services:
       - "50000:50000"
     environment:
       - SOCKET_API_KEY=${SOCKET_API_KEY}
+      - GITHUB_REPO_URL=${GITHUB_REPO_URL:-https://github.com/dc-larsen/nodegoat-jenkins-socket-demo.git}
+      - REPO_NAME=${REPO_NAME:-nodegoat-jenkins-socket-demo}
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
     volumes:
       - jenkins_home:/var/jenkins_home

@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         SOCKET_SECURITY_API_TOKEN = credentials('socket-api-key')
+        REPO_NAME = "${env.REPO_NAME ?: 'nodegoat-jenkins-socket-demo'}"
     }
 
     stages {
@@ -20,16 +21,16 @@ pipeline {
 
         stage('Socket Security Scan') {
             steps {
-                sh '''
+                sh """
                     socketcli \
                         --target-path . \
-                        --repo dc-larsen/nodegoat-jenkins-socket-demo \
+                        --repo ${env.REPO_NAME ?: 'nodegoat-jenkins-socket-demo'} \
                         --default-branch \
                         --reach \
                         --reach-ecosystems npm \
                         --disable-blocking \
                         --integration api
-                '''
+                """
             }
         }
     }
