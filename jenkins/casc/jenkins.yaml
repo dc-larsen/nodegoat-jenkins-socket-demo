@@ -39,6 +39,7 @@ jobs:
           }
         }
       }
+      queue('nodegoat-socket-scan')
 
       def repoUrl2 = System.getenv('GITHUB_REPO_URL_2')
       if (repoUrl2) {
@@ -59,4 +60,5 @@ jobs:
             }
           }
         }
+        queue("${repoName2}-socket-scan")
       }
