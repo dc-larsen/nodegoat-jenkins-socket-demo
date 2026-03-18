@@ -48,6 +48,10 @@ export GITHUB_REPO_URL=https://github.com/YOUR_GITHUB_USER/nodegoat-jenkins-sock
 
 # Optional: customize the repo name in Socket dashboard (defaults to nodegoat-jenkins-socket-demo)
 export REPO_NAME=nodegoat-jenkins-socket-demo
+
+# Optional: add a second project (must have its own Jenkinsfile with socketcli)
+export GITHUB_REPO_URL_2=https://github.com/YOUR_GITHUB_USER/another-repo.git
+export REPO_NAME_2=another-repo
 ```
 
 ### 3. Start the stack (Jenkins + NodeGoat + MongoDB)

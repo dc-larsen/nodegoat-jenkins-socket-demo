@@ -39,3 +39,24 @@ jobs:
           }
         }
       }
+
+      def repoUrl2 = System.getenv('GITHUB_REPO_URL_2')
+      if (repoUrl2) {
+        def repoName2 = System.getenv('REPO_NAME_2') ?: 'project-2'
+        pipelineJob("${repoName2}-socket-scan") {
+          description("Socket Security Scan for ${repoName2}")
+          definition {
+            cpsScm {
+              scm {
+                git {
+                  remote {
+                    url(repoUrl2)
+                  }
+                  branch('*/main')
+                }
+              }
+              scriptPath('Jenkinsfile')
+            }
+          }
+        }
+      }
