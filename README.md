@@ -122,12 +122,24 @@ pipeline {
 }
 ```
 
+### Multiple Projects
+
+All Jenkinsfiles live in this repo. Each project gets its own file:
+
+| File | Purpose |
+|------|---------|
+| `Jenkinsfile` | Scans this repo (NodeGoat) |
+| `Jenkinsfile.2` | Clones and scans the repo from `GITHUB_REPO_URL_2` |
+
+To add a third project, copy `Jenkinsfile.2` to `Jenkinsfile.3`, add `GITHUB_REPO_URL_3`/`REPO_NAME_3` env vars, and add a matching job block in `jenkins/casc/jenkins.yaml`.
+
 ### Jenkins Configuration as Code (JCasC)
 
 `jenkins/casc/jenkins.yaml` pre-configures:
 - Admin credentials (admin/admin)
 - Socket API key credential injected from `SOCKET_API_KEY` env var
 - Pipeline job pointed at your fork via `GITHUB_REPO_URL` env var
+- Optional second job auto-created when `GITHUB_REPO_URL_2` is set
 
 ### Docker Compose
 

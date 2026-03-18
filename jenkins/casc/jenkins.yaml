@@ -50,12 +50,12 @@ jobs:
               scm {
                 git {
                   remote {
-                    url(repoUrl2)
+                    url("${GITHUB_REPO_URL}")
                   }
                   branch('*/main')
                 }
               }
-              scriptPath('Jenkinsfile')
+              scriptPath('Jenkinsfile.2')
             }
           }
         }
